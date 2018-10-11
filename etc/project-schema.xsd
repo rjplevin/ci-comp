@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' elementFormDefault='qualified'>
+
+    <xs:include schemaLocation="conditional.xsd"/>
+    <xs:include schemaLocation="comment.xsd"/>
+
+    <xs:simpleType name="runForType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="baseline"/>
+            <xs:enumeration value="policy"/>
+            <xs:enumeration value="all"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name='projects'>
+        <xs:complexType>
+            <xs:choice maxOccurs='unbounded'>
+                <xs:element ref='defaults'/>
+                <xs:element ref='project'/>
+                <xs:element ref='comment'/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='defaults'>
+        <xs:complexType>
+            <xs:choice maxOccurs='unbounded'>
+                <xs:element ref='steps'/>
+                <xs:element ref='tmpFile'/>
+                <xs:element ref='vars'/>
+                <xs:element ref='queries'/>
+                <xs:element ref='comment'/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='project'>
+        <xs:complexType>
+            <xs:choice maxOccurs='unbounded'>
+                <xs:element ref='steps'/>
+                <xs:element ref='tmpFile'/>
+                <xs:element ref='vars'/>
+                <!-- <xs:element ref='scenarios'/> -->
+                <xs:element ref='scenariosFile'/>
+                <xs:element ref='queries'/>
+                <xs:element ref='comment'/>
+                <xs:element ref='CONDITIONAL'/>
+            </xs:choice>
+            <xs:attribute name='name' use='required' type='xs:string'/>
+            <xs:attribute name='subdir' type='xs:string'/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- basically an "include" statement -->
+    <xs:element name='scenariosFile'>
+        <xs:complexType>
+            <xs:attribute name='name' use='required' type='xs:string'/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='steps'>
+        <xs:complexType>
+            <xs:choice maxOccurs='unbounded'>
+                <xs:element ref='step'/>
+                <xs:element ref='comment'/>
+                <xs:element ref='CONDITIONAL'/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='step'>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name='name' use='required' type='xs:string'/>
+                    <xs:attribute name='runFor' type='runForType' default='all'/>
+                    <xs:attribute name='group' type='xs:string' default=''/>
+                    <xs:attribute name='seq' type='xs:integer' default='0'/>
+                    <xs:attribute name='optional' type='xs:boolean' default='false'/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='vars'>
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref='var'/>
+                <xs:element ref='comment'/>
+                <xs:element ref='CONDITIONAL'/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='var'>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name='configVar' type='xs:string'/>
+                    <xs:attribute name='eval' type='xs:boolean' default='false'/>
+                    <xs:attribute name='name' use='required' type='xs:string'/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='tmpFile'>
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref='text'/>
+                <xs:element ref='comment'/>
+            </xs:choice>
+            <xs:attribute name='delete' type='xs:boolean' default="true"/>
+            <xs:attribute name='eval' type='xs:boolean' default="true"/>
+            <xs:attribute name='replace' type='xs:boolean' default="false"/>
+            <xs:attribute name='varName' use='required' type='xs:string'/>
+            <xs:attribute name='dir' type='xs:string'/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='text'>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name='tag' type='xs:string'/>
+                    <xs:attribute name='args' type='xs:string'/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='queries'>
+        <xs:complexType>
+            <xs:choice maxOccurs='unbounded' >
+                <xs:element ref='query'/>
+                <xs:element ref='comment'/>
+                <xs:element ref='CONDITIONAL'/>
+            </xs:choice>
+            <xs:attribute name='varName' use='required' type='xs:string'/>
+            <xs:attribute name='defaultMap' type='xs:string'/>
+            <xs:attribute name='delete' type='xs:boolean'/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='query'>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs='unbounded'>
+                <xs:element ref='rewriter'/>
+                <xs:element ref='comment'/>
+                <xs:element ref='CONDITIONAL'/>
+            </xs:choice>
+            <xs:attribute name='name' use='required' type='xs:string'/>
+            <xs:attribute name='saveAs' type='xs:string'/>
+            <xs:attribute name='useDefault' type='xs:boolean'/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name='rewriter'>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name='name' use='required' type='xs:string'/>
+                    <xs:attribute name='level' type='xs:string'/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
