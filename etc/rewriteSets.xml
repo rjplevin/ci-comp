@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<rewriteSets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			 xsi:noNamespaceSchemaLocation="rewriteSets-schema.xsd">
+<rewriteSets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsd/rewriteSets-schema.xsd">
 
 	<rewriteSet name="liquidFuels" level="technology" append-values="false">
 		<rewrite from="cellulosic ethanol" to="Cellulosic ethanol"/>
@@ -54,6 +53,46 @@
 		<rewrite from="Argentina" to="Rest of South America"/>
 		<rewrite from="Colombia" to="Rest of South America"/>
 		<rewrite from="Australia_NZ" to="Rest of Asia"/>
+	</rewriteSet>
+
+	<rewriteSet name="twelveRegions" level="region" append-values="true">
+		<!--
+		  XAS = Rest of Asia
+		  XLA = Rest of Latin America
+		  ROW = Rest of World
+		-->
+		<rewrite from="USA" to="USA"/>
+		<rewrite from="Brazil" to="Brazil"/>
+		<rewrite from="Canada" to="Canada"/>
+		<rewrite from="China" to="China"/>
+		<rewrite from="Africa_Eastern" to="Africa"/>
+		<rewrite from="Africa_Northern" to="Africa"/>
+		<rewrite from="Africa_Southern" to="Africa"/>
+		<rewrite from="Africa_Western" to="Africa"/>
+		<rewrite from="Japan" to="XAS"/>
+		<rewrite from="South Korea" to="XAS"/>
+		<rewrite from="India" to="India"/>
+		<rewrite from="Central America and Caribbean" to="XLA"/>
+		<rewrite from="Central Asia" to="XAS"/>
+		<rewrite from="EU-12" to="Europe"/>
+		<rewrite from="EU-15" to="Europe"/>
+		<rewrite from="Europe_Eastern" to="Europe"/>
+		<rewrite from="Europe_Non_EU" to="Europe"/>
+		<rewrite from="European Free Trade Association" to="Europe"/>
+		<rewrite from="Indonesia" to="Indonesia"/>
+		<rewrite from="Mexico" to="XLA"/>
+		<rewrite from="Middle East" to="ROW"/>
+		<rewrite from="Pakistan" to="ROW"/>
+		<rewrite from="Russia" to="Russia"/>
+		<rewrite from="South Africa" to="Africa"/>
+		<rewrite from="South America_Northern" to="XLA"/>
+		<rewrite from="South America_Southern" to="XLA"/>
+		<rewrite from="South Asia" to="XAS"/>
+		<rewrite from="Southeast Asia" to="XAS"/>
+		<rewrite from="Taiwan" to="XAS"/>
+		<rewrite from="Argentina" to="XLA"/>
+		<rewrite from="Colombia" to="XLA"/>
+		<rewrite from="Australia_NZ" to="ROW"/>
 	</rewriteSet>
 
 	<rewriteSet name="food" level="input">

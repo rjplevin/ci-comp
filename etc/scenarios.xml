@@ -7,7 +7,7 @@ Also see scenarios2.xml, which offers a slightly more complex example.
 
 <scenarios name="uniqueName" defaultGroup="group"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="scenarios-schema.xsd">
+       xsi:noNamespaceSchemaLocation="xsd/scenarios-schema.xsd">
 
     <scenarioGroup name="group" useGroupDir="0">
         <scenario name="base" baseline="1">

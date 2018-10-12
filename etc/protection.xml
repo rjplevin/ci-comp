@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<landProtection> <!-- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:noNamespaceSchemaLocation="protection-schema.xsd" -->
+<landProtection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsd/protection-schema.xsd">
     <!--
     <group> assigns to a set of regions a name that can be used in protection scenarios.
 
